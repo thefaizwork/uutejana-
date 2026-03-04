@@ -7,13 +7,13 @@ import React, { useState } from 'react';
 // No need to dig through the complex code below!
 // ==========================================
 const NAV_LINKS = [
-  { name: 'Home', href: '#home' },
-  { name: 'About Us', href: '#about-us' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Events', href: '#events' },
-  { name: 'Gallery', href: '#gallery' },
+  { name: 'Home', href: '/' },
+  { name: 'About Us', href: '/about-us' },
+  { name: 'Projects', href: '/project' },
+  { name: 'Events', href: '/events' },
+  { name: 'Gallery', href: '/gallery' },
   { name: 'Blog', href: '/blogs' },
-  { name: 'Contact', href: '#contacts' },
+  { name: 'Contact', href: '/contacts' },
 ];
 
 export default function App() {
