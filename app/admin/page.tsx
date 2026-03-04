@@ -135,7 +135,7 @@ export default function AdminPage() {
     <div className="min-h-screen bg-[#FFF9F0] text-[#334EAC] font-[family-name:var(--font-geist-sans)]">
       <div className="flex flex-col lg:flex-row min-h-screen">
         <aside className="w-full lg:w-72 bg-[#334EAC] text-white p-8 flex flex-col">
-          <div className="flex items-center gap-3 mb-12"><div className="bg-[#7096D1] w-8 h-8 rounded-full flex items-center justify-center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-4 h-4"><path d="M12 15l-3-3m3 3l3-3m-3 3V2" /></svg></div><span className="font-bold text-xl tracking-tight">KidHope Panel</span></div>
+          <div className="flex items-center gap-3 mb-12"><div className="bg-[#7096D1] w-8 h-8 rounded-full flex items-center justify-center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-4 h-4"><path d="M12 15l-3-3m3 3l3-3m-3 3V2" /></svg></div><span className="font-bold text-xl tracking-tight">Uttejana Foundation</span></div>
           <nav className="flex-grow space-y-2">
             {TABS.map(tab => (
               <button key={tab.id} onClick={() => { setActiveTab(tab.id as TabType); setGalId(null); setGalBatchId(null); }} className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all font-bold text-sm ${activeTab === tab.id ? 'bg-[#7096D1] text-white shadow-lg' : 'hover:bg-white/10 text-white/70'}`}>
