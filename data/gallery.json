@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "batchName": "Spring Education Mentors",
+    "year": "2025",
+    "members": 45,
+    "image": "https://images.unsplash.com/photo-1559027615-cd4628ce2751?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1559027615-cd4628ce2751?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1497486751825-1233686d5d80?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": 2,
+    "batchName": "Disaster Relief Team",
+    "year": "2024",
+    "members": 120,
+    "image": "https://images.unsplash.com/photo-1594708767771-a7502209ff51?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1594708767771-a7502209ff51?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": 3,
+    "batchName": "Healthcare Assistants",
+    "year": "2023",
+    "members": 65,
+    "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": 4,
+    "batchName": "Community Builders",
+    "year": "2022",
+    "members": 80,
+    "image": "https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": 5,
+    "batchName": "Food Drive Champions",
+    "year": "2021",
+    "members": 55,
+    "image": "https://images.unsplash.com/photo-1603048297172-c92544798d5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1603048297172-c92544798d5e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1578357078586-491adf1aa5ba?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1593113630400-ea4288922497?auto=format&fit=crop&w=800&q=80"
+    ]
+  },
+  {
+    "id": 6,
+    "batchName": "Founding Volunteers",
+    "year": "2020",
+    "members": 25,
+    "image": "https://images.unsplash.com/photo-1593113589914-075568e09151?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1593113589914-075568e09151?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560252829-804f1aedf1be?auto=format&fit=crop&w=800&q=80"
+    ]
+  }
+]

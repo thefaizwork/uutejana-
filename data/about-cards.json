@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "category": "Who We Are",
+    "title": "Companies House",
+    "image": "https://images.unsplash.com/photo-1594708767771-a7502209ff51?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 3,
+    "category": "Storys",
+    "title": "Building A Future In Africa",
+    "image": "https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 1772618249305,
+    "category": "agd",
+    "title": "gsdgds",
+    "image": "https://www.gettyimages.in/photos/india-gate"
+  }
+]
