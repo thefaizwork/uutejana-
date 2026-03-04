@@ -1,0 +1,10 @@
+{
+  "title": "Our First Campaign",
+  "author": "Admin",
+  "date": "Jul 10, 2025",
+  "category": "Education",
+  "excerpt": "Children in rural areas need your help to access quality education.",
+  "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800",
+  "content": ["Children in rural areas face many challenges when it comes to accessing quality education.", "With your support, we can build schools and provide learning materials to those in need."],
+  "featured": true
+}
