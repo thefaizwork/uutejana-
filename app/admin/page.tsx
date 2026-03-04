@@ -2,12 +2,11 @@
 import React, { useState, useEffect } from 'react';
 
 interface Project { id: number; title: string; description: string; image: string; }
-interface Blog { id: number; title: string; author: string; date: string; }
+interface BlogItem { _id: string; title: string; author: string; date: string; category: string; excerpt: string; image: string; content: string[]; featured: boolean; }
 interface GalleryBatch { id: number; batchName: string; year: string; members: number; image: string; gallery: string[]; }
 interface AboutCard { id: number; category: string; title: string; image: string; }
 interface EventItem { id: number; title: string; date: string; shortDescription: string; coverImage: string; gallery: string[]; }
 
-const INITIAL_BLOGS: Blog[] = [{ id: 1, title: "How Access to Clean Water Transforms Communities", author: "Sarah Jenkins", date: "Oct 12, 2025" }];
 type TabType = 'about' | 'events' | 'projects' | 'blogs' | 'gallery';
 const TABS = [
   { id: 'about', label: 'About Cards', icon: 'M4 6h16M4 10h16M4 14h8' },
@@ -17,14 +16,21 @@ const TABS = [
   { id: 'gallery', label: 'Gallery', icon: 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z' },
 ];
 const TRASH = 'M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16';
-const LIVE_TABS = ['about', 'events', 'projects', 'gallery'];
+const LIVE_TABS = ['about', 'events', 'projects', 'blogs', 'gallery'];
 
 export default function AdminPage() {
   const [isAuth, setIsAuth] = useState(false);
   const [activeTab, setActiveTab] = useState<TabType>('about');
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [loginError, setLoginError] = useState('');
-  const [blogs, setBlogs] = useState(INITIAL_BLOGS);
+  const [blogs, setBlogs] = useState<BlogItem[]>([]);
+  const [blogLoading, setBlogLoading] = useState(false);
+  const [blogErr, setBlogErr] = useState('');
+  const [showAddBlog, setShowAddBlog] = useState(false);
+  const [blogForm, setBlogForm] = useState({ title: '', author: '', date: '', category: '', excerpt: '', image: '', content: '', featured: false });
+  const [blogFormErr, setBlogFormErr] = useState('');
+  const [addingBlog, setAddingBlog] = useState(false);
+  const [blogPrevErr, setBlogPrevErr] = useState(false);
   const [aboutCards, setAboutCards] = useState<AboutCard[]>([]);
   const [aboutLoading, setAboutLoading] = useState(false);
   const [aboutErr, setAboutErr] = useState('');
@@ -72,12 +78,24 @@ export default function AdminPage() {
     if (activeTab === 'events') fetchEvents();
     if (activeTab === 'projects') fetchProjects();
     if (activeTab === 'gallery') fetchGallery();
+    if (activeTab === 'blogs') fetchBlogs();
   }, [isAuth, activeTab]);
 
   async function fetchAbout() { setAboutLoading(true); setAboutErr(''); try { const r = await fetch('/api/about-cards'); if (!r.ok) throw 0; setAboutCards(await r.json()); } catch { setAboutErr('Could not load cards.'); } finally { setAboutLoading(false); } }
   async function fetchEvents() { setEvLoading(true); setEvErr(''); try { const r = await fetch('/api/events'); if (!r.ok) throw 0; setEvents(await r.json()); } catch { setEvErr('Could not load events.'); } finally { setEvLoading(false); } }
   async function fetchProjects() { setProjLoading(true); setProjErr(''); try { const r = await fetch('/api/projects'); if (!r.ok) throw 0; setProjects(await r.json()); } catch { setProjErr('Could not load projects.'); } finally { setProjLoading(false); } }
   async function fetchGallery() { setGalLoading(true); setGalBatchErr(''); try { const r = await fetch('/api/gallery'); if (!r.ok) throw 0; setGalBatches(await r.json()); } catch { setGalBatchErr('Could not load gallery batches.'); } finally { setGalLoading(false); } }
+  async function fetchBlogs() { setBlogLoading(true); setBlogErr(''); try { const r = await fetch('/api/blogs'); if (!r.ok) throw 0; setBlogs(await r.json()); } catch { setBlogErr('Could not load blogs.'); } finally { setBlogLoading(false); } }
+  async function addBlog(e: React.FormEvent) {
+    e.preventDefault(); setBlogFormErr('');
+    const { title, author, date, category, excerpt, image, content, featured } = blogForm;
+    if (!title.trim() || !author.trim() || !date.trim() || !category.trim() || !excerpt.trim() || !image.trim() || !content.trim()) { setBlogFormErr('All fields are required.'); return; }
+    const paragraphs = content.split('\n').map(p => p.trim()).filter(Boolean);
+    setAddingBlog(true);
+    try { const r = await fetch('/api/blogs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title, author, date, category, excerpt, image, content: paragraphs, featured }) }); if (!r.ok) throw 0; const nb = await r.json(); setBlogs(p => [nb, ...p]); setBlogForm({ title: '', author: '', date: '', category: '', excerpt: '', image: '', content: '', featured: false }); setShowAddBlog(false); }
+    catch { setBlogFormErr('Failed to save blog.'); } finally { setAddingBlog(false); }
+  }
+  async function delBlog(id: string) { setBlogs(p => p.filter(b => b._id !== id)); try { const r = await fetch(`/api/blogs/${id}`, { method: 'DELETE' }); if (!r.ok) fetchBlogs(); } catch { fetchBlogs(); } }
   async function addAbout(e: React.FormEvent) { e.preventDefault(); setAboutFormErr(''); if (!aboutForm.category.trim() || !aboutForm.title.trim() || !aboutForm.image.trim()) { setAboutFormErr('All fields required.'); return; } setAddingAbout(true); try { const r = await fetch('/api/about-cards', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(aboutForm) }); if (!r.ok) throw 0; const c = await r.json(); setAboutCards(p => [...p, c]); setAboutForm({ category: '', title: '', image: '' }); setShowAddAbout(false); } catch { setAboutFormErr('Failed to add.'); } finally { setAddingAbout(false); } }
   async function delAbout(id: number) { setAboutCards(p => p.filter(c => c.id !== id)); try { const r = await fetch(`/api/about-cards/${id}`, { method: 'DELETE' }); if (!r.ok) fetchAbout(); } catch { fetchAbout(); } }
   async function addEv(e: React.FormEvent) { e.preventDefault(); setEvFormErr(''); if (!evForm.title.trim() || !evForm.date.trim() || !evForm.shortDescription.trim() || !evForm.coverImage.trim()) { setEvFormErr('All fields required.'); return; } setAddingEv(true); try { const r = await fetch('/api/events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(evForm) }); if (!r.ok) throw 0; const ev = await r.json(); setEvents(p => [...p, ev]); setEvForm({ title: '', date: '', shortDescription: '', coverImage: '' }); setShowAddEv(false); } catch { setEvFormErr('Failed to add.'); } finally { setAddingEv(false); } }
@@ -142,7 +160,7 @@ export default function AdminPage() {
               {activeTab === 'projects' && <button onClick={() => { setShowAddProj(!showAddProj); setProjFormErr(''); setProjForm({ title: '', description: '', image: '' }); }} className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${showAddProj ? 'bg-gray-100 text-[#334EAC]' : 'bg-[#334EAC] hover:bg-[#7096D1] text-white'}`}>{showAddProj ? 'Cancel' : '+ Add Project'}</button>}
               {activeTab === 'gallery' && !galBatchId && <button onClick={() => { setShowAddBatch(!showAddBatch); setBatchFormErr(''); setBatchForm({ batchName: '', year: '', members: '', image: '' }); }} className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${showAddBatch ? 'bg-gray-100 text-[#334EAC]' : 'bg-[#334EAC] hover:bg-[#7096D1] text-white'}`}>{showAddBatch ? 'Cancel' : '+ Add Batch'}</button>}
               {activeTab === 'gallery' && galBatchId && <button onClick={() => { setGalBatchId(null); setNewBatchImgUrl(''); setBatchImgErr(''); }} className="px-6 py-3 rounded-xl font-bold text-sm bg-gray-100 text-[#334EAC] hover:bg-gray-200 transition-all">Back to Batches</button>}
-              {activeTab === 'blogs' && <button className="bg-[#334EAC] hover:bg-[#7096D1] text-white px-6 py-3 rounded-xl font-bold text-sm transition-all">+ Add New</button>}
+              {activeTab === 'blogs' && <button onClick={() => { setShowAddBlog(!showAddBlog); setBlogFormErr(''); setBlogForm({ title: '', author: '', date: '', category: '', excerpt: '', image: '', content: '', featured: false }); }} className={`px-6 py-3 rounded-xl font-bold text-sm transition-all ${showAddBlog ? 'bg-gray-100 text-[#334EAC]' : 'bg-[#334EAC] hover:bg-[#7096D1] text-white'}`}>{showAddBlog ? 'Cancel' : '+ Add Blog'}</button>}
             </div>
           </div>
           {/* ABOUT TAB */}
@@ -333,14 +351,54 @@ export default function AdminPage() {
 
           {/* BLOGS TAB */}
           {activeTab === 'blogs' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {blogs.map(b => (
-                <div key={b.id} className="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-4">
-                  <div className="flex-grow min-w-0"><h4 className="font-bold text-md truncate">{b.title}</h4><p className="text-xs text-[#7096D1]">{b.author} · {b.date}</p></div>
-                  <button onClick={() => setBlogs(blogs.filter(x => x.id !== b.id))} className="p-3 text-red-500 hover:bg-red-50 rounded-xl shrink-0"><svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d={TRASH} /></svg></button>
+            <div>
+              {showAddBlog && (
+                <form onSubmit={addBlog} className="bg-white border border-[#7096D1]/20 rounded-3xl p-6 sm:p-8 mb-8 shadow-sm">
+                  <h3 className="font-bold text-lg mb-5">New Blog Post</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div><label className="block text-xs font-bold uppercase tracking-widest mb-2 text-[#334EAC]/70">Title</label><input type="text" value={blogForm.title} onChange={e => setBlogForm({ ...blogForm, title: e.target.value })} placeholder="e.g. Youth Empowerment in 2025" className="w-full bg-[#FFF9F0] border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#7096D1]" /></div>
+                    <div><label className="block text-xs font-bold uppercase tracking-widest mb-2 text-[#334EAC]/70">Author</label><input type="text" value={blogForm.author} onChange={e => setBlogForm({ ...blogForm, author: e.target.value })} placeholder="e.g. Rahul Sharma" className="w-full bg-[#FFF9F0] border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#7096D1]" /></div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div><label className="block text-xs font-bold uppercase tracking-widest mb-2 text-[#334EAC]/70">Date</label><input type="text" value={blogForm.date} onChange={e => setBlogForm({ ...blogForm, date: e.target.value })} placeholder="e.g. January 15, 2026" className="w-full bg-[#FFF9F0] border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#7096D1]" /></div>
+                    <div><label className="block text-xs font-bold uppercase tracking-widest mb-2 text-[#334EAC]/70">Category</label><input type="text" value={blogForm.category} onChange={e => setBlogForm({ ...blogForm, category: e.target.value })} placeholder="e.g. Youth Awareness" className="w-full bg-[#FFF9F0] border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#7096D1]" /></div>
+                  </div>
+                  <div className="mb-4"><label className="block text-xs font-bold uppercase tracking-widest mb-2 text-[#334EAC]/70">Cover Image URL</label><input type="text" value={blogForm.image} onChange={e => { setBlogForm({ ...blogForm, image: e.target.value }); setBlogPrevErr(false); }} placeholder="https://..." className="w-full bg-[#FFF9F0] border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#7096D1]" /></div>
+                  {blogForm.image && !blogPrevErr && <img src={blogForm.image} alt="Preview" className="h-28 w-48 object-cover rounded-xl border border-gray-200 mb-4" onError={() => setBlogPrevErr(true)} />}
+                  <div className="mb-4"><label className="block text-xs font-bold uppercase tracking-widest mb-2 text-[#334EAC]/70">Excerpt (short summary)</label><textarea rows={2} value={blogForm.excerpt} onChange={e => setBlogForm({ ...blogForm, excerpt: e.target.value })} placeholder="A brief summary shown on the blog listing..." className="w-full bg-[#FFF9F0] border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#7096D1] resize-none" /></div>
+                  <div className="mb-4"><label className="block text-xs font-bold uppercase tracking-widest mb-2 text-[#334EAC]/70">Content <span className="normal-case font-normal text-[#334EAC]/50">(each line = one paragraph)</span></label><textarea rows={6} value={blogForm.content} onChange={e => setBlogForm({ ...blogForm, content: e.target.value })} placeholder={"First paragraph of the article...\nSecond paragraph...\nThird paragraph..."} className="w-full bg-[#FFF9F0] border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#7096D1] resize-none" /></div>
+                  <div className="mb-5 flex items-center gap-3">
+                    <input type="checkbox" id="featured" checked={blogForm.featured} onChange={e => setBlogForm({ ...blogForm, featured: e.target.checked })} className="w-4 h-4 accent-[#334EAC]" />
+                    <label htmlFor="featured" className="text-sm font-bold text-[#334EAC]">Mark as Featured Post <span className="font-normal text-[#334EAC]/50">(shown prominently at top of blog page)</span></label>
+                  </div>
+                  {blogFormErr && <p className="text-red-500 text-xs font-bold mb-3">{blogFormErr}</p>}
+                  <button type="submit" disabled={addingBlog} className="bg-[#334EAC] hover:bg-[#7096D1] text-white font-bold uppercase tracking-widest px-8 py-3 rounded-xl text-sm disabled:opacity-60">{addingBlog ? 'Publishing...' : 'Publish Blog'}</button>
+                </form>
+              )}
+              {blogLoading && <div className="flex justify-center py-20"><div className="animate-spin w-8 h-8 border-4 border-[#7096D1] border-t-transparent rounded-full"></div></div>}
+              {blogErr && <div className="bg-red-50 border border-red-200 text-red-600 rounded-2xl px-6 py-4 text-sm font-bold mb-6">{blogErr} <button onClick={fetchBlogs} className="underline ml-2">Retry</button></div>}
+              {!blogLoading && !blogErr && (
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {blogs.map(b => (
+                    <div key={b._id} className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group">
+                      <div className="relative w-full h-44 overflow-hidden">
+                        <img src={b.image} alt={b.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <span className="absolute top-3 left-3 bg-[#334EAC] text-white text-[0.6rem] font-bold uppercase tracking-widest px-3 py-1 rounded-full">{b.category}</span>
+                        {b.featured && <span className="absolute top-3 right-3 bg-[#7096D1] text-white text-[0.6rem] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Featured</span>}
+                      </div>
+                      <div className="p-5 flex flex-col flex-grow">
+                        <h4 className="font-bold text-lg mb-1 line-clamp-2">{b.title}</h4>
+                        <p className="text-[#7096D1] text-xs mb-1">{b.author} · {b.date}</p>
+                        <p className="text-[#334EAC]/60 text-xs mb-4 line-clamp-2">{b.excerpt}</p>
+                        <button onClick={() => delBlog(b._id)} className="mt-auto w-full flex items-center justify-center gap-2 bg-red-50 text-red-500 hover:bg-red-500 hover:text-white py-2.5 rounded-xl font-bold text-xs transition-all">
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d={TRASH} /></svg>Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                  {blogs.length === 0 && <div className="col-span-3 text-center py-20 text-gray-400"><p className="text-xl font-bold">No Blogs Yet</p><p className="text-sm mt-1">Publish your first blog post above.</p></div>}
                 </div>
-              ))}
-              {blogs.length === 0 && <div className="col-span-3 text-center py-20 text-gray-400"><p className="text-xl font-bold">No Blogs Yet</p><p className="text-sm mt-1">Start by adding your first entry.</p></div>}
+              )}
             </div>
           )}
 

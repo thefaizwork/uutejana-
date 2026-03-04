@@ -56,14 +56,14 @@ export default function App() {
           
           {/* Subtitle */}
           <p className="text-[#7096D1] text-[0.7rem] sm:text-xs font-extrabold tracking-[0.2em] mb-4 sm:mb-6 lg:mb-8 uppercase">
-            Non-profit Charity
+            NGO · Youth &amp; Community
           </p>
 
-          {/* Main Headline - Text slightly scaled to guarantee it fits without scroll */}
+          {/* Main Headline */}
           <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl xl:text-[5rem] font-heading font-semibold leading-[1.1] mb-6 sm:mb-10 lg:mb-14">
-            Give{' '}
+            Inspiring{' '}
             <span className="relative inline-block">
-              Hope
+              Youth,
               
               {/* Custom Underline SVG */}
               <svg
@@ -98,27 +98,26 @@ export default function App() {
               </svg>
             </span>
             <br />
-            To Children
+            Empowering
             <br />
-            In Need.
+            Communities.
           </h1>
 
           {/* Call to Action Buttons */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 lg:gap-6">
-            {/* Donate Button */}
+            {/* Join Button */}
             <button className="bg-[#7096D1] hover:bg-[#5a80bf] text-white text-[0.7rem] sm:text-xs font-bold uppercase tracking-widest px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-[#7096D1]/40">
-              Donate Now
+              Join Our Mission
             </button>
             
-            {/* Video Button */}
+            {/* Learn More Button */}
             <button className="group flex items-center gap-2 lg:gap-3 border border-[#7096D1] hover:bg-white/10 text-white text-[0.7rem] sm:text-xs font-bold uppercase tracking-widest px-5 sm:px-6 lg:px-8 py-3 lg:py-4 rounded-full transition-all duration-300">
               <span className="flex items-center justify-center transition-transform group-hover:scale-110">
-                {/* Play Icon */}
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3 lg:w-4 lg:h-4">
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </span>
-              Video Playing Theme
+              Our Story
             </button>
           </div>
         </div>

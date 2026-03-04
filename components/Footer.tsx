@@ -35,10 +35,10 @@ export default function App() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <h2 className="text-[#FFF9F0] text-4xl sm:text-5xl lg:text-6xl font-heading font-bold leading-tight relative z-10">
-                  Ready To Make A<br />
-                  Real Difference In<br />
-                  A Child's Life?
+              <h2 className="text-[#FFF9F0] text-4xl sm:text-5xl lg:text-6xl font-heading font-bold leading-tight relative z-10">
+                  Ready To Be Part<br />
+                  Of A Positive<br />
+                  Social Change?
                 </h2>
               </div>
             </div>
@@ -73,8 +73,8 @@ export default function App() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                     <span className="text-[#FFF9F0]/70 text-sm sm:text-base leading-relaxed">
-                      123 Hope Avenue, Global Charity Center<br />
-                      New York, NY 10001
+                      Uttejana Foundation,<br />
+                      India
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
@@ -82,7 +82,7 @@ export default function App() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                     <span className="text-[#FFF9F0]/70 text-sm sm:text-base">
-                      +1 (800) 123-4567
+                      +91 00000 00000
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
@@ -90,7 +90,7 @@ export default function App() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                     <span className="text-[#FFF9F0]/70 text-sm sm:text-base">
-                      hello@kidhope.org
+                      info@uttejana.org
                     </span>
                   </li>
                 </ul>
@@ -105,18 +105,17 @@ export default function App() {
           {/* Bottom Section: Logo and Socials */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
             
-            {/* Logo Section */}
+            {/* Logo Section — place your logo at public/images/logo.png */}
             <div className="flex items-center gap-3 cursor-pointer group">
-              <div className="bg-[#FFF9F0] w-10 h-10 rounded-full flex items-center justify-center transition-transform group-hover:scale-105 shadow-lg">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-[#334EAC]">
-                  <path d="M12 22v-7l-3-3" />
-                  <path d="M12 15l3-3" />
-                  <path d="M9 12A5 5 0 0 1 9 2a5 5 0 0 1 5 5v5" />
-                  <path d="M15 12a5 5 0 0 0 5-10 5 5 0 0 0-5 5v5" />
-                </svg>
+              <div className="bg-[#FFF9F0] w-10 h-10 rounded-full overflow-hidden flex items-center justify-center transition-transform group-hover:scale-105 shadow-lg shrink-0">
+                <img
+                  src="/images/logo.png"
+                  alt="Uttejana Foundation Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <span className="text-[#FFF9F0] font-bold text-2xl tracking-tight">
-                KidHope
+              <span className="text-[#FFF9F0] font-bold text-xl tracking-tight leading-tight">
+                Uttejana<br /><span className="text-[0.65rem] font-semibold tracking-widest uppercase text-[#7096D1]">Foundation</span>
               </span>
             </div>
 
@@ -144,7 +143,7 @@ export default function App() {
           
           {/* Copyright text at the very bottom */}
           <div className="mt-8 text-center sm:text-left text-[#FFF9F0]/40 text-xs">
-            © {new Date().getFullYear()} KidHope Foundation. All rights reserved.
+            © {new Date().getFullYear()} Uttejana Foundation. All rights reserved.
           </div>
 
         </div>

@@ -51,7 +51,7 @@ export default function App() {
                 </div>
                 <div>
                   <h4 className="text-[#334EAC] font-bold text-sm">Location</h4>
-                  <p className="text-[#334EAC]/70 text-xs">New York, NY 10001</p>
+                  <p className="text-[#334EAC]/70 text-xs">Delhi</p>
                 </div>
               </div>
 
@@ -64,7 +64,7 @@ export default function App() {
                 </div>
                 <div>
                   <h4 className="text-[#334EAC] font-bold text-sm">Email</h4>
-                  <p className="text-[#334EAC]/70 text-xs">hello@kidhope.org</p>
+                  <p className="text-[#334EAC]/70 text-xs">xyz</p>
                 </div>
               </div>
 
@@ -77,7 +77,7 @@ export default function App() {
                 </div>
                 <div>
                   <h4 className="text-[#334EAC] font-bold text-sm">Call Us</h4>
-                  <p className="text-[#334EAC]/70 text-xs">+1 (800) 123-4567</p>
+                  <p className="text-[#334EAC]/70 text-xs">123</p>
                 </div>
               </div>
             </div>

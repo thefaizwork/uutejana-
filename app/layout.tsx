@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js App",
-  description: "Minimal Next.js starter with Tailwind CSS",
+  title: "Uttejana Foundation",
+  description: "Uttejana Foundation — NGO dedicated to Youth Inspiration, Slum Development, Women Empowerment, and Youth Awareness. Creating and carving leaders through excitement and enthusiasm.",
 };
 
 export default function RootLayout({

@@ -65,57 +65,59 @@ export default function About() {
           </div>
 
           {/* ======================================================== */}
-          {/* 2. ABOUT US SECTION (static content)                     */}
+          {/* 2. ABOUT US SECTION                                      */}
           {/* ======================================================== */}
           <div className="flex flex-col text-center items-center justify-center mb-16 lg:mb-20">
             <p className="text-[#7096D1] text-[0.75rem] sm:text-sm font-extrabold tracking-[0.2em] mb-4 uppercase flex items-center gap-4">
               <span className="w-12 h-px bg-[#7096D1]"></span>
-              Non-Profit Charity
+              Non-Profit NGO
               <span className="w-12 h-px bg-[#7096D1]"></span>
             </p>
             <h2 className="text-[#334EAC] text-4xl sm:text-5xl lg:text-6xl font-heading font-bold leading-[1.15] max-w-3xl">
-              Who We Are & <br className="hidden sm:block" />
-              What We Do For Children
+              Who We Are &amp; <br className="hidden sm:block" />
+              What We Stand For
             </h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-            {/* Left: Image Collage */}
+            {/* Left: Logo + Image Collage */}
             <div className="relative w-full aspect-square sm:aspect-video lg:aspect-square">
               <div className="absolute top-0 right-0 w-[85%] h-[85%] rounded-[2.5rem] overflow-hidden shadow-2xl z-10 border-8 border-[#FFF9F0]">
                 <img
-                  src="https://images.unsplash.com/photo-1603048297172-c92544798d5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                  alt="Happy kids running"
+                  src="https://images.unsplash.com/photo-1529390079861-591de354faf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  alt="Youth empowerment"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute bottom-0 left-0 w-[55%] h-[55%] rounded-[2.5rem] overflow-hidden shadow-2xl z-20 border-8 border-[#FFF9F0]">
+              {/* Logo placeholder — drop your logo at public/images/logo.png */}
+              <div className="absolute bottom-0 left-0 w-[55%] h-[55%] rounded-[2.5rem] overflow-hidden shadow-2xl z-20 border-8 border-[#FFF9F0] bg-white flex items-center justify-center">
                 <img
-                  src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                  alt="Close up smiling child"
-                  className="w-full h-full object-cover"
+                  src="/images/logo.png"
+                  alt="Uttejana Foundation Logo"
+                  className="w-3/4 h-3/4 object-contain"
                 />
               </div>
               <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-4 sm:-translate-x-8 z-30 bg-[#7096D1] text-[#FFF9F0] rounded-full w-32 h-32 sm:w-40 sm:h-40 flex flex-col items-center justify-center shadow-xl p-4 text-center">
-                <span className="font-heading text-4xl sm:text-5xl font-bold mb-1">15+</span>
-                <span className="text-xs sm:text-sm font-bold uppercase tracking-wider leading-tight">Years of<br/>Impact</span>
+                <span className="font-heading text-4xl sm:text-5xl font-bold mb-1">80%</span>
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-wider leading-tight">Citizens<br/>Support NGOs</span>
               </div>
             </div>
 
             {/* Right: Text Content */}
             <div className="flex flex-col justify-center">
               <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#334EAC] mb-6">
-                We are on a mission to build a brighter, healthier future for helpless children.
+                On a never-ending mission of creating and carving leaders.
               </h3>
               <p className="text-[#334EAC]/80 text-base sm:text-lg leading-relaxed mb-8">
-                KidHope is a global non-profit organization dedicated to empowering children in underserved communities. We believe that every child deserves access to quality education, proper healthcare, and a safe environment to grow and thrive.
+                Uttejana Foundation believes in not just helping others by sharing resources, but by helping them create their own. The word <em>Uttejana</em> means <strong>excitement</strong> — because any work done with enthusiasm yields the best results. We are currently serving in Youth Inspiration, Slum Development, Women Empowerment, and Youth Awareness.
               </p>
               <ul className="space-y-4 mb-10">
                 {[
-                  { title: "Education Facilities", desc: "Building schools and providing learning materials." },
-                  { title: "Healthy Food & Water", desc: "Ensuring daily nutrition and clean drinking water." },
-                  { title: "Medical Assistance", desc: "Free healthcare checkups and medical support." }
+                  { title: "Youth Inspiration", desc: "Creating awareness and inspiring the next generation of leaders." },
+                  { title: "Women Empowerment", desc: "Supporting women with skills, resources, and opportunities." },
+                  { title: "Slum Development", desc: "Improving living conditions and access to basic necessities." },
+                  { title: "Youth Awareness", desc: "A youth team from diverse fields working toward a common goal." }
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-4">
                     <div className="mt-1 bg-[#7096D1]/20 p-2 rounded-full shrink-0">

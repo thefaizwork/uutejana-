@@ -8,11 +8,12 @@ import React, { useState } from 'react';
 // ==========================================
 const NAV_LINKS = [
   { name: 'Home', href: '#home' },
-  { name: 'Campaigns', href: '#campaigns' },
   { name: 'About Us', href: '#about-us' },
-  { name: 'Pages', href: '#pages' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Events', href: '#events' },
+  { name: 'Gallery', href: '#gallery' },
   { name: 'Blog', href: '/blogs' },
-  { name: 'Contacts', href: '#contacts' },
+  { name: 'Contact', href: '#contacts' },
 ];
 
 export default function App() {
@@ -28,19 +29,17 @@ export default function App() {
         {/* 1. LOGO SECTION                */}
         {/* ============================== */}
         <a href="#home" className="flex items-center gap-3 cursor-pointer group hover:opacity-90 transition-opacity">
-          {/* Logo Icon Background (Planetary Dark Blue) */}
-          <div className="bg-[#334EAC] w-10 h-10 rounded-full flex items-center justify-center transition-transform group-hover:scale-105">
-            {/* Custom Sprout SVG */}
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-white">
-              <path d="M12 22v-7l-3-3" />
-              <path d="M12 15l3-3" />
-              <path d="M9 12A5 5 0 0 1 9 2a5 5 0 0 1 5 5v5" />
-              <path d="M15 12a5 5 0 0 0 5-10 5 5 0 0 0-5 5v5" />
-            </svg>
+          {/* Logo Image — place your logo at public/images/logo.png */}
+          <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-[#334EAC]/10 transition-transform group-hover:scale-105 shrink-0">
+            <img
+              src="/images/logo.png"
+              alt="Uttejana Foundation Logo"
+              className="w-full h-full object-contain"
+            />
           </div>
           {/* Logo Text */}
-          <span className="text-[#334EAC] font-bold text-2xl tracking-tight">
-            KidHope
+          <span className="text-[#334EAC] font-bold text-xl tracking-tight leading-tight">
+            Uttejana<br /><span className="text-[0.65rem] font-semibold tracking-widest uppercase text-[#7096D1]">Foundation</span>
           </span>
         </a>
 
@@ -85,7 +84,7 @@ export default function App() {
 
           {/* Main CTA Button */}
           <button className="bg-[#334EAC] hover:bg-[#7096D1] text-white text-[0.75rem] sm:text-[0.8rem] font-bold uppercase tracking-widest px-6 sm:px-8 py-3 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 shadow-md shadow-[#334EAC]/20">
-            Donate Now
+            Join Us
           </button>
 
           {/* Mobile Hamburger Toggle Button */}
